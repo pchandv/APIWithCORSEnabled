@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.757
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAT_API", "SAT_API\SAT_API.csproj", "{9DF32D72-9A54-47EB-845C-A588EAF24EDE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9DF32D72-9A54-47EB-845C-A588EAF24EDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DF32D72-9A54-47EB-845C-A588EAF24EDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DF32D72-9A54-47EB-845C-A588EAF24EDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DF32D72-9A54-47EB-845C-A588EAF24EDE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {265A35BC-38FC-4DF9-B668-C018D35BA38D}
+	EndGlobalSection
+EndGlobal
