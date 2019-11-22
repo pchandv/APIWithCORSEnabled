@@ -15,14 +15,20 @@
             ajax.setRequestHeader("Content-type", "application/json; charset=utf-8");
             ajax.setRequestHeader("Content-length", params.length);
             ajax.setRequestHeader("Connection", "close");
-            ajax.responseType = "blob";
+           
             ajax.onreadystatechange = function () {
-                if (this.readyState == 4) {
-                    debugger;
-                    var blob = new Blob([this.response], { type: "application/octet-stream" });
-                    var fileName = "PuneetGoelDotNetZip.zip";
-                    saveAs(blob, fileName);
-                }
+                if (this.readyState == 4 ) {
+
+                    if (ajax.status == 200) {
+                        ajax.responseType = "blob";
+                        var blob = new Blob([this.response], { type: "application/octet-stream" });
+                        var fileName = "PuneetGoelDotNetZip.zip";
+                        saveAs(blob, fileName);
+                    } else if (ajax.status == 500) {
+                        alert(ajax.response);
+                    }
+                  
+                }  
             };
             ajax.send(params);
         }

@@ -9,6 +9,9 @@ using System.Web.Http;
 using System.IO.Compression;
 //using System.IO.Compression.FileSystem;
 using System.Web.Http.Cors;
+using Newtonsoft.Json;
+using System.Text;
+
 namespace SAT_API.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
@@ -47,11 +50,24 @@ namespace SAT_API.Controllers
 
         public HttpResponseMessage Post([FromBody]Dummy dm)
         {
-            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
-            result.Content = new ByteArrayContent(CreateZip(dm));
-            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/zip");
-            return result;
-        }
+            HttpResponseMessage result = new HttpResponseMessage();
+            try
+            {
+                result.Content = new ByteArrayContent(CreateZip(dm));
+                result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/zip");
+                result.StatusCode = HttpStatusCode.OK;
+                throw new Exception();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                var json = JsonConvert.SerializeObject(dm);
+                result.Content = new StringContent("{'error':'" + json + "'}",Encoding.UTF8, "application/json");
+                result.StatusCode = HttpStatusCode.InternalServerError;
+                //result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                return result;
+            }
+        }   
 
 
 
