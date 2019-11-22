@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Zipping File In MVC</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
+    <script type="text/javascript">
+        function downloadFiles() {
+            debugger
+            var ajax = new XMLHttpRequest();
+            ajax.open("Post", "api/values", true);
+            ajax.responseType = "blob";
+            ajax.onreadystatechange = function () {
+                if (this.readyState == 4) {
+                    debugger;
+                    var blob = new Blob([this.response], { type: "application/octet-stream" });
+                    var fileName = "PuneetGoelDotNetZip.zip";
+                    saveAs(blob, fileName);
+                }
+            };
+            ajax.send(null);
+        }
+    </script>
+</head>
+<body>
+    <p>Zip and Download</p>
+    <a id="cancelUrl" href="#" onclick="downloadFiles();">Download With Ajax</a>
+</body>
+</html>

@@ -33,10 +33,27 @@ namespace SAT_API.Controllers
 
         //}
 
-        public string Post([FromBody]Dummy dm)
+        //public string Post([FromBody]Dummy dm)
+        //{
+        //    return "FirstName: "+ dm.Firstname+",LastName: "+dm.LastName+ ",Response format Coming from API";
+        //}
+        //public IHttpActionResult Post([FromBody]Dummy dm)
+        //{
+        //    //return "FirstName: " + dm.Firstname + ",LastName: " + dm.LastName + ",Response format Coming from API";
+
+        //    return 
+
+        //}
+
+        public HttpResponseMessage Post([FromBody]Dummy dm)
         {
-            return "FirstName: "+ dm.Firstname+",LastName: "+dm.LastName+ ",Response format Coming from API";
+            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
+            result.Content = new ByteArrayContent(CreateZip(dm));
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/zip");
+            return result;
         }
+
+
 
 
         // POST api/values
@@ -44,7 +61,7 @@ namespace SAT_API.Controllers
         //{
         //    HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
         //    result.Content = new ByteArrayContent(CreateZip(param));
-        //    result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/zip, application/octet-stream");
+        //    result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/zip");
         //    return result;
         //}
 
@@ -59,23 +76,23 @@ namespace SAT_API.Controllers
         }
 
 
-        //private byte[] CreateZip(string data)
-        //{
-        //    using (var ms = new MemoryStream())
-        //    {
-        //        using (var ar = new ZipArchive(ms, ZipArchiveMode.Create, true))
-        //        {
-        //            var file = ar.CreateEntry("file.html");
+        private byte[] CreateZip(Dummy data)
+        {
+            using (var ms = new MemoryStream())
+            {
+                using (var ar = new ZipArchive(ms, ZipArchiveMode.Create, true))
+                {
+                    var file = ar.CreateEntry("file.html");
 
-        //            using (var entryStream = file.Open())
-        //            using (var sw = new StreamWriter(entryStream))
-        //            {
-        //                sw.Write(data);
-        //            }
-        //        }
-        //        return ms.ToArray();
-        //    }
-        //}
+                    using (var entryStream = file.Open())
+                    using (var sw = new StreamWriter(entryStream))
+                    {
+                        sw.Write(data);
+                    }
+                }
+                return ms.ToArray();
+            }
+        }
 
 
 
