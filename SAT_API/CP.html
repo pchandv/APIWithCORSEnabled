@@ -10,7 +10,11 @@
         function downloadFiles() {
             debugger
             var ajax = new XMLHttpRequest();
+            var params = JSON.stringify({ Firstname: "Praveen", LastName: "Chand" });
             ajax.open("Post", "api/values", true);
+            ajax.setRequestHeader("Content-type", "application/json; charset=utf-8");
+            ajax.setRequestHeader("Content-length", params.length);
+            ajax.setRequestHeader("Connection", "close");
             ajax.responseType = "blob";
             ajax.onreadystatechange = function () {
                 if (this.readyState == 4) {
@@ -20,7 +24,7 @@
                     saveAs(blob, fileName);
                 }
             };
-            ajax.send(null);
+            ajax.send(params);
         }
     </script>
 </head>
